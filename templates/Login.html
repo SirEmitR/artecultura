@@ -1,0 +1,9 @@
+{%extends 'layout.html'%}
+{%block main%}
+    <form action="" method="POST">
+        {%csrf_token%}
+        {{formulario.as_p}}
+        <button>Ingresar</button>
+    </form>
+    <a href="/usuario/agregar">Nuevo usuario</a>
+{%endblock%}

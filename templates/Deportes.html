@@ -1,0 +1,21 @@
+{%extends 'layout.html'%}
+{%block main%}
+{%if form%}
+<h1>Deporte</h1>
+<form action="" method="POST">
+    {%csrf_token%}
+    {{form.as_p}}
+    <button>Guardar</button>
+</form>
+{%else%}
+    <h2>Lista de actividades</h2>
+    <ul>
+        {%for a in Actividades%}
+        <li>{{a.nombre}}
+            <p>{{a.descripcion}}</p>
+        </li>
+        {%endfor%}
+    </ul>
+    <a href="deportes/agregar">Nueva actividad</a>
+{%endif%}
+{%endblock%}
