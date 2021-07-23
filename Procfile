@@ -1,1 +1,1 @@
-web: gunicorn artecultura.wsgi
+web: gunicorn artecultura.wsgi --log-file -
