@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from dijango.config import settings
 
 from django.conf.urls import url
+
+from django.conf.urls.static import static
 
 from artecultura.views import inicio, enviarCorreo, ingresar, registrarUsuario as agregar, salir
 from arte.views import agregar as agregarArte, inicio as inicioArte, listaActividad
@@ -36,4 +39,4 @@ urlpatterns = [
     url(r'^login$', ingresar),
     url(r"^usuario/agregar$", agregar),
     url(r"^logout", salir)
-]
+] + static(settings.STATIC_URL, document_root= settings.STATIC_ROOT)

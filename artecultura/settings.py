@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-e+=ionzs=@qgx6wdwg=2+sx7ow2w72_)-ud)-ty!hk#1!csysy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["herokuapp.com"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'artecultura.urls'
@@ -77,15 +78,12 @@ WSGI_APPLICATION = 'artecultura.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+import dj_database_url 
+from decouple import config
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':'artecultura',
-        'USER':'root',
-        'PASSWORD':'',
-        'HOST': 'localhost',
-    }
+    'default': dj_database_url.config(
+        default= config('DATABASE_URL')
+    )
 }
 
 
@@ -126,16 +124,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 EMAIL_HOST="smtp.googlemail.com"
 EMAIL_PORT="587"
 EMAIL_HOST_USER="emit3reyes@gmail.com"
 EMAIL_HOST_PASSWORD="dbthzvsqvvoxkoar"
 EMAIL_USE_TLS= True
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
