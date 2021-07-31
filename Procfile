@@ -1,1 +1,1 @@
-web: gunicorn acd-05.wsgi --log-file -
+web: gunicorn gettingstarted.wsgi 
