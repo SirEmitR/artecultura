@@ -1,1 +1,1 @@
-web: gunicorn artecultura.wsgi --log-file -
+web: gunicorn acd-05.wsgi --log-file -
